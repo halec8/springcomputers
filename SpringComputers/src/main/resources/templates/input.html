@@ -3,10 +3,88 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert a new Computer</title>
+<script type="text/javascript">
+/**
+ * This is a JS Script to validate the form in which a user inputs their computer information.
+ * This should validate the brand
+ * This should validate the model
+ * This should validate the yearReleased
+ * This should validate the screenSize
+ * This should validate the type
+ * This should validate the shippingAddress.street
+ * This should validate the shippingAddress.city
+ * This should validate the shippingAddress.state 
+ */
+function validate(){
+	
+	/* this validates the brand */
+
+	if(document.computersForm.brand.value == ""){
+		alert("No brand was entered! Please provide the brand of your computer!");
+		document.computersForm.brand.focus();
+		return false;
+	}
+	
+	/* this validate the model */
+	if(document.computersForm.model.value == ""){
+		alert("No model was entered! Please provide the model of your computer!");
+		document.computersForm.model.focus();
+		return false;
+	}
+	
+	/* this validates the yearReleased */
+	if(document.computersForm.yearReleased.value == "" || document.computersForm.yearReleased.value.length != 4) {
+		alert("Please provide the year you computer make and model was released in the formate ####.");
+		document.computersForm.yearReleased.focus();
+		return false;
+	}
+	/* this validates the screenSize */
+	if(document.computersForm.screenSize.value == "" || document.computersForm.screenSize.value.length > 4) {
+		alert("Please provide the screen size of your computer's' make and model in the formate ####.");
+		document.computersForm.screenSize.focus();
+		return false;
+	}
+	
+	/* this validates the type  */
+		if(document.computersForm.type.value == ""){
+		alert("No computer type was entered! Please provide the type of computer you are entering in!");
+		document.computersForm.type.focus();
+		return false;
+	}
+	
+	/* this validates the shippingAddress.street */
+	if(document.computersForm.shippingAddress.street.value == ""){
+		alert("No street was entered! Please provide the street of your shipping address!");
+		document.computersForm.shippingAddress.street.focus();
+		return false;
+	}
+	
+	
+	/* this validates the shippingAddress.city */
+	if(document.computersForm.shippingAddress.city.value == ""){
+		alert("No city was entered! Please provide the city of your shipping address!");
+		document.computersForm.shippingAddress.city.focus();
+		return false;
+	}
+	
+	/* this validates the shippingAddress.state */
+	if(document.computersForm.shippingAddress.state.value == ""){
+		alert("No state was entered! Please provide the state of your shipping address!");
+		document.computersForm.shippingAddress.state.focus();
+		return false;
+		
+	}
+	
+	
+	
+	return(true);
+	
+}
+</script>
 </head>
 <body>
-	<form th:object="${newComputers}"
-	th:action="@{/update/{id}(id=${newComputers.id})}" method=POST>
+	<form name = "computersForm" onsubmit="return(validate())" th:object="${newComputers}"
+	th:action="@{/update/{id}(id=${newComputers.id})}" method=POST >
 		
 		Brand: <input name="brand" size="20" th:field="*{brand}"> <br />
 		Model: <input name="model" size="20" th:field="*{model}"> <br />
@@ -20,7 +98,7 @@
 			name="shippingAddress.city" size="20"
 			th:field="*{shippingAddress.city}"> <br /> State: <input
 			name="shippingAddress.state" size="20"
-			th:field="*{shippingAddress.State}"> <br /> <input
+			th:field="*{shippingAddress.state}"> <br /> <input
 			name="submit" type="submit" value="submit" />
 	</form>
 	<a href="viewAll">View all Computers</a>
